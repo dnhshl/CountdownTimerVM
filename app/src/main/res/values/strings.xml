@@ -2,8 +2,8 @@
     <string name="app_name">CountdownTimerVM</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="settimer_fragment_label">Neuer Termin</string>
+    <string name="showtimer_fragment_label">Countdown</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="time_picker_title">Welche Zeit?</string>
@@ -14,7 +14,7 @@
 
     <string name="tv_time_hint">Zeit</string>
     <string name="tv_date_hint">Datum</string>
-    <string name="et_titel_label">OK</string>
+    <string name="et_titel_label">Termin</string>
 
     <string name="time_format_string">HH:mm</string>
     <string name="date_format_string">dd.MM.yy</string>

@@ -7,8 +7,8 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.main.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_showTimerFragment"
             app:destination="@id/showTimerFragment" />
@@ -19,11 +19,11 @@
     <fragment
         android:id="@+id/showTimerFragment"
         android:name="com.example.main.ShowTimerFragment"
-        android:label="fragment_showtimer"
+        android:label="@string/showtimer_fragment_label"
         tools:layout="@layout/fragment_showtimer" />
     <fragment
         android:id="@+id/settimerFragment"
         android:name="com.example.main.SettimerFragment"
-        android:label="fragment_settimer"
+        android:label="@string/settimer_fragment_label"
         tools:layout="@layout/fragment_settimer" />
 </navigation>

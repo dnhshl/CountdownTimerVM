@@ -51,7 +51,7 @@ class MainFragment : Fragment() {
         binding.lvTermine.adapter = adapter
 
         binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_showTimerFragment)
+            findNavController().navigate(R.id.action_mainFragment_to_settimerFragment)
         }
     }
 

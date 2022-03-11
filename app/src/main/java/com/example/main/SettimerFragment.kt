@@ -39,7 +39,7 @@ class SettimerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnShowtimer.setOnClickListener {
+        binding.btnOK.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_showTimerFragment)
         }
 
