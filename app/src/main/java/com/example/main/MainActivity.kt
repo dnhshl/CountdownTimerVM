@@ -44,16 +44,14 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        binding.fab.setOnClickListener { view ->
-            //showDatePicker()
-            getTitleDialog()
-            viewModel.addTermin("Hallo")
-        }
+        //binding.fab.setOnClickListener { view ->
+        //    navController.navigate(R.id.settimerFragment)
+        //}
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
+        //menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 
@@ -73,52 +71,5 @@ class MainActivity : AppCompatActivity() {
                 || super.onSupportNavigateUp()
     }
 
-    fun showDatePicker() {
-        val datePicker =
-            MaterialDatePicker.Builder.datePicker()
-                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-                .setTitleText(R.string.date_picker_title)
-                .build()
-        datePicker.addOnPositiveButtonClickListener {
-            Log.i(TAG, "From DatePicker ${datePicker.selection.toString()}")
-            showTimePicker()
-        }
-        // bringe den TimePicker zur Anzeige
-        datePicker.show(supportFragmentManager, TAG)
-    }
-
-    fun showTimePicker() {
-        val timePicker =
-            MaterialTimePicker.Builder()
-                .setTimeFormat(TimeFormat.CLOCK_24H)
-                .setHour(12)
-                .setMinute(0)
-                .setTitleText(R.string.time_picker_title)
-                .build()
-        timePicker.addOnPositiveButtonClickListener {
-            Log.i(TAG, "From TimePicker ${timePicker.hour}:${timePicker.minute}")
-
-        }
-        // bringe den TimePicker zur Anzeige
-        timePicker.show(supportFragmentManager, TAG)
-    }
-
-    fun getTitleDialog() {
-
-        //val textInputLayout = TextInputLayout(applicationContext)
-        //val editTextTitle = TextInputEditText(textInputLayout.context)
-        val editTextTitle = EditText(applicationContext)
-        editTextTitle.setPadding(20,0,20,0)
-
-
-        val builder: AlertDialog.Builder? = let {
-            AlertDialog.Builder(it)
-        }
-        builder?.setMessage(R.string.app_name)
-            ?.setTitle(R.string.time_picker_title)
-            ?.setView(editTextTitle)
-        val dialog: AlertDialog? = builder?.create()
-        dialog?.show()
-    }
 
 }

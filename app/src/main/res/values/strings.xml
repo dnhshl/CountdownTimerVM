@@ -16,6 +16,7 @@
     <string name="tv_date_hint">Datum</string>
     <string name="et_titel_label">Termin</string>
     <string name="error_edit_termin">Bitte Termintitel, Datum und Zeit auswählen</string>
+    <string name="nothing_selected">Bitte wählen Sie einen Termin aus der Liste\noder setzten Sie einen neuen Termin</string>
 
     <string name="time_format_string">HH:mm</string>
     <string name="date_format_string">dd.MM.yy</string>

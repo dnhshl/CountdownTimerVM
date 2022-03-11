@@ -50,8 +50,11 @@ class MainFragment : Fragment() {
         adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1,viewModel.terminList.value!!)
         binding.lvTermine.adapter = adapter
 
-        binding.buttonFirst.setOnClickListener {
+        binding.btnSetTimer.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_settimerFragment)
+        }
+        binding.btnShowTimer.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_showTimerFragment)
         }
     }
 

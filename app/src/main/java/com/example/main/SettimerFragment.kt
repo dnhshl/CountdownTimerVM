@@ -53,7 +53,7 @@ class SettimerFragment : Fragment() {
             val titlestring = binding.editTitle.text.toString()
             if (!titlestring.equals("") && dateSet && timeSet) {
                 val format = getString(R.string.date_time_format_string)
-                val datetime =  date.atTime(time)
+                val datetime = date.atTime(time)
                 val datetimestring = datetime.format(DateTimeFormatter.ofPattern(format))
                 val terminstring = getString(R.string.list_entry).format(titlestring, datetimestring)
                 viewModel.addTermin(terminstring)
