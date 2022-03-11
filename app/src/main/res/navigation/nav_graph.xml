@@ -25,5 +25,9 @@
         android:id="@+id/settimerFragment"
         android:name="com.example.main.SettimerFragment"
         android:label="@string/settimer_fragment_label"
-        tools:layout="@layout/fragment_settimer" />
+        tools:layout="@layout/fragment_settimer" >
+        <action
+            android:id="@+id/action_settimerFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>

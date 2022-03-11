@@ -15,9 +15,13 @@
     <string name="tv_time_hint">Zeit</string>
     <string name="tv_date_hint">Datum</string>
     <string name="et_titel_label">Termin</string>
+    <string name="error_edit_termin">Bitte Termintitel, Datum und Zeit auswählen</string>
 
     <string name="time_format_string">HH:mm</string>
     <string name="date_format_string">dd.MM.yy</string>
+    <string name="date_time_format_string">dd.MM.yy HH:mm</string>
+
+    <string name="list_entry">%s\n%s</string>
 
     <string name="time_display">%s Uhr</string>
 
