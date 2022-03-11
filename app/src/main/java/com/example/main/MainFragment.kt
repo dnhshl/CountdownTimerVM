@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListAdapter
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.main.databinding.FragmentMainBinding
@@ -64,7 +65,10 @@ class MainFragment : Fragment() {
             findNavController().navigate(R.id.action_mainFragment_to_settimerFragment)
         }
         binding.btnShowTimer.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_showTimerFragment)
+            if (!viewModel.terminSelected.value.equals(""))
+                findNavController().navigate(R.id.action_mainFragment_to_showTimerFragment)
+            else
+                Toast.makeText(context, R.string.nothing_selected, Toast.LENGTH_LONG).show()
         }
 
         binding.lvTermine.setOnItemClickListener { adapterView, view, i, l ->
