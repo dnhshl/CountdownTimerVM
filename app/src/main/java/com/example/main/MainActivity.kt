@@ -1,6 +1,8 @@
 package com.example.main
 
+import android.content.Context
 import android.content.DialogInterface
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import com.google.android.material.snackbar.Snackbar
@@ -11,18 +13,17 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.EditText
+
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
+
 import com.example.main.databinding.ActivityMainBinding
+
 import com.example.main.model.MainViewModel
-import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.datepicker.MaterialDatePicker.Builder.datePicker
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
-import com.google.android.material.timepicker.MaterialTimePicker
-import com.google.android.material.timepicker.TimeFormat
+
+
+const val LISTSIZE = "listsize"
+const val LISTITEM = "item_"
+const val SELECTEDITEM ="selected"
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,11 +39,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        readSharedPreferences()
+
         setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
+
 
         //binding.fab.setOnClickListener { view ->
         //    navController.navigate(R.id.settimerFragment)
@@ -70,6 +74,39 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i(TAG, "onPause")
+        writeSharedPreferences()
+    }
+
+    private fun writeSharedPreferences() {
+        Log.i(TAG, "writeSharedPreferences")
+        // speicher die Terminliste
+        val sp = getPreferences(Context.MODE_PRIVATE)
+        val edit = sp.edit()
+        val list = viewModel.getTerminList()!!
+        edit.putInt(LISTSIZE, list.size)
+        for(i in 0 until list.size){
+            edit.putString("$LISTITEM$i", list.get(i))
+        }
+        edit.putString(SELECTEDITEM, viewModel.getTerminSelected())
+        edit.commit()
+    }
+
+    private fun readSharedPreferences() {
+        Log.i(TAG, "readSharedPreferences")
+        // Termine wieder einlesen
+        val sp = getPreferences(Context.MODE_PRIVATE)
+        val anzahl = sp.getInt(LISTSIZE, 0)
+        for(i in 0 until anzahl){
+            viewModel.addTermin(sp.getString("$LISTITEM$i", "").toString())
+        }
+        viewModel.setTerminSelected(sp.getString(SELECTEDITEM, "").toString())
+    }
+
+
 
 
 }

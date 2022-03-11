@@ -43,7 +43,7 @@ class ShowTimerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val parts: List<String> = viewModel.terminSelected.value!!.split("\n")
+        val parts: List<String> = viewModel.getTerminSelected().split("\n")
         Log.i(TAG, "Termin: ${parts.toString()}")
 
         binding.tvTitle.text = parts[0]
