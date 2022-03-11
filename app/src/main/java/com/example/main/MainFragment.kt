@@ -43,9 +43,19 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.terminList.observe(viewLifecycleOwner,
-            { terminList -> adapter.notifyDataSetChanged()
-            })
+        viewModel.terminList.observe(viewLifecycleOwner)
+            {
+                adapter.notifyDataSetChanged()
+            }
+
+        viewModel.terminSelected.observe(viewLifecycleOwner)
+            { termin ->
+                if (termin.equals(""))
+                    binding.tvTermin.text = getString(R.string.nothing_selected)
+                else
+                    binding.tvTermin.text = getString(R.string.termin_selected).format(termin)
+            }
+
 
         adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1,viewModel.terminList.value!!)
         binding.lvTermine.adapter = adapter
@@ -55,6 +65,10 @@ class MainFragment : Fragment() {
         }
         binding.btnShowTimer.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_showTimerFragment)
+        }
+
+        binding.lvTermine.setOnItemClickListener { adapterView, view, i, l ->
+            viewModel.setTerminSelected(binding.lvTermine.getItemAtPosition(i).toString())
         }
     }
 

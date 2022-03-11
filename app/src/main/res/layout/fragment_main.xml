@@ -17,36 +17,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/outlined_termin"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="291dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="50dp"
-        android:hint="@string/et_titel_label"
+
+    <TextView
+        android:id="@+id/tv_termin"
+        android:layout_width="285dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="48dp"
+        android:background="@color/purple_200"
+        android:backgroundTint="@color/purple_200"
+        android:paddingLeft="20dp"
+        android:text="@string/nothing_selected"
+        android:textAlignment="gravity"
+        android:textColor="@color/black"
+        android:textColorHint="#757575"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lv_termine">
-
-        <TextView
-            android:id="@+id/tv_termin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/nothing_selected"
-            android:textColorHint="#757575"
-            tools:ignore="TextContrastCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@+id/lv_termine"
+        tools:ignore="TextContrastCheck" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/outlined_termin">
+        app:layout_constraintTop_toBottomOf="@+id/tv_termin">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_show_timer"
