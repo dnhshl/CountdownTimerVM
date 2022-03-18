@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModel
 
 
 
-class MainViewModel(application: android.app.Application): AndroidViewModel(application) {
+class MainViewModel: ViewModel() {
 
     private val TAG = "MainViewModel"
 
@@ -29,8 +29,18 @@ class MainViewModel(application: android.app.Application): AndroidViewModel(appl
     }
 
     fun addTermin(termin: String) {
-        _terminList.value?.add(termin)
+        if (!(_terminList.value?.contains(termin) ?: true)) {
+            _terminList.value?.add(termin)
+            _terminList.notifyObserver()
+            Log.i(TAG, _terminList.value.toString())
+        }
+    }
+
+    fun removeTermin(termin: String) {
+        _terminList.value?.removeAll {it.equals(termin)}
         _terminList.notifyObserver()
+        if (_terminSelected.value.equals(termin))
+            _terminSelected.value = ""
         Log.i(TAG, _terminList.value.toString())
     }
 
@@ -51,9 +61,4 @@ class MainViewModel(application: android.app.Application): AndroidViewModel(appl
     fun <T> MutableLiveData<T>.notifyObserver() {
         this.value = this.value
     }
-
-    override fun onCleared() {
-        super.onCleared()
-    }
-
 }

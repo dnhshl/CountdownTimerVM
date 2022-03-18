@@ -21,11 +21,13 @@ import com.example.main.databinding.ActivityMainBinding
 import com.example.main.model.MainViewModel
 
 
-const val LISTSIZE = "listsize"
-const val LISTITEM = "item_"
-const val SELECTEDITEM ="selected"
+
 
 class MainActivity : AppCompatActivity() {
+
+    private val LISTSIZE = "listsize"
+    private val LISTITEM = "item_"
+    private val SELECTEDITEM ="selected"
 
     private val TAG = "MainActivity"
 
@@ -47,27 +49,8 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-
-        //binding.fab.setOnClickListener { view ->
-        //    navController.navigate(R.id.settimerFragment)
-        //}
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -105,8 +88,5 @@ class MainActivity : AppCompatActivity() {
         }
         viewModel.setTerminSelected(sp.getString(SELECTEDITEM, "").toString())
     }
-
-
-
 
 }

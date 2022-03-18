@@ -44,28 +44,26 @@ class ShowTimerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val parts: List<String> = viewModel.getTerminSelected().split("\n")
+        val terminTitel = parts[0]
+        val terminDateTimeString = parts[1]
         Log.i(TAG, "Termin: ${parts.toString()}")
 
-        binding.tvTitle.text = parts[0]
-        val timediff = calcTimeDiffInSeconds(parts[1])
+        binding.tvTitle.text = terminTitel
+        val timediff = calcTimeDiffInSeconds(terminDateTimeString)
 
         if (timediff < 0) {
             binding.tvCountdown.text = getString(R.string.countdown_display_over)
         } else {
-
             // Countdowntimer zählt die timediff im Sekundentakt runter
             countDownTimer = object : CountDownTimer(timediff * 1000, 1000) {
-
                 override fun onTick(millisUntilFinished: Long) {
                     binding.tvCountdown.text = timediffToComponents(millisUntilFinished)
                 }
-
                 override fun onFinish() {
                     binding.tvCountdown.text = getString(R.string.countdown_display_over)
                     MediaPlayer.create(context, Settings.System.DEFAULT_NOTIFICATION_URI).start()
                 }
             }
-
             countDownTimer.start()
             countDownTimerStarted = true
         }

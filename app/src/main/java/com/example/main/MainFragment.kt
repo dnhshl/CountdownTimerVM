@@ -13,6 +13,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.main.databinding.FragmentMainBinding
 import com.example.main.model.MainViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -26,40 +27,38 @@ class MainFragment : Fragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
 
-    private lateinit var adapter: ArrayAdapter<String>
-    private lateinit var list: MutableList<String>
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.terminList.observe(viewLifecycleOwner)
-            {
-                adapter.notifyDataSetChanged()
-            }
+        // Adapter für den ListView
+        val adapter = ArrayAdapter(requireContext(),
+            android.R.layout.simple_list_item_1,   // Layout zur Darstellung der ListItems
+            viewModel.getTerminList()!!)           // Liste, die Dargestellt werden soll
 
-        viewModel.terminSelected.observe(viewLifecycleOwner)
-            { termin ->
+        // Adapter an den ListView koppeln
+        binding.lvTermine.adapter = adapter
+
+        // Mittels Observer den Adapter über Änderungen in der Liste informieren
+        viewModel.terminList.observe(viewLifecycleOwner) { adapter.notifyDataSetChanged() }
+
+        viewModel.terminSelected.observe(viewLifecycleOwner) { termin ->
                 if (termin.equals(""))
                     binding.tvTermin.text = getString(R.string.nothing_selected)
                 else
                     binding.tvTermin.text = getString(R.string.termin_selected).format(termin)
-            }
+        }
 
 
-        adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1,viewModel.terminList.value!!)
-        binding.lvTermine.adapter = adapter
+
 
         binding.btnSetTimer.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_settimerFragment)
@@ -72,7 +71,25 @@ class MainFragment : Fragment() {
         }
 
         binding.lvTermine.setOnItemClickListener { adapterView, view, i, l ->
-            viewModel.setTerminSelected(binding.lvTermine.getItemAtPosition(i).toString())
+            // i ist der Index des geklickten Eintrags
+            showDialog(binding.lvTermine.getItemAtPosition(i).toString())
+        }
+    }
+
+    private fun showDialog(selectedItem: String) {
+        context?.let {
+            MaterialAlertDialogBuilder(it)
+                .setTitle(R.string.dialog_title)
+                .setMessage(selectedItem)
+                .setNeutralButton(R.string.dialog_cancel) { dialog, which ->
+                }
+                .setNegativeButton(R.string.dialog_delete) { dialog, which ->
+                    viewModel.removeTermin(selectedItem)
+                }
+                .setPositiveButton(R.string.dialog_select) { dialog, which ->
+                    viewModel.setTerminSelected(selectedItem)
+                }
+                .show()
         }
     }
 

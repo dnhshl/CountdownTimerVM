@@ -27,7 +27,10 @@
 
     <string name="time_display">%s Uhr</string>
 
-
+    <string name="dialog_title">Termin</string>
+    <string name="dialog_select">auswählen</string>
+    <string name="dialog_delete">löschen</string>
+    <string name="dialog_cancel">Abbruch</string>
 
     <string name="countdown_display_over">ist schon vorbei.</string>
     <string name="countdown_format_string">noch %s Tag(e)\n%s Stunde(n)\n%s Minute(n)\n%s Sekunde(n)</string>

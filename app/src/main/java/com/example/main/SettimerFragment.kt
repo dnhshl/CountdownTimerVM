@@ -40,10 +40,8 @@ class SettimerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentSettimerBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,11 +70,9 @@ class SettimerFragment : Fragment() {
             showTimePicker()
         }
 
-
         binding.btnEditDate.setOnClickListener {
             showDatePicker()
         }
-
     }
 
     override fun onDestroyView() {
